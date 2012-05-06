@@ -3,6 +3,7 @@
 ;; Copyright (C) 2012 David Röthlisberger
 
 ;; Author: David Röthlisberger <david@rothlis.net>
+;; Version: 2.0
 ;; Keywords: faces
 
 ;; This file is not part of GNU Emacs.
