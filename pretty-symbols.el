@@ -100,13 +100,13 @@ symbols in: (add-hook 'emacs-lisp-mode 'pretty-symbols-mode)."
       (?∧ logical "\\<and\\>" (,@lisps))
       (?∨ logical "||" (,@c-like))
       (?∨ logical "\\<or\\>" (,@lisps))
-      ;;(?¬ 'logical "\\<!\\>" (,@c-like)) ; TODO: Fix regex so that ! matches
+      ;;(?¬ logical "\\<!\\>" (,@c-like)) ; TODO: Fix regex so that ! matches
                                         ; but != doesn't. (\< and \> don't work
                                         ; because ! isn't considered part of
                                         ; a word). This will require support
                                         ; for subgroups and not replacing the
                                         ; whole match.
-      (?¬ 'logical "\\<not\\>" (,@lisps))
+      (?¬ logical "\\<not\\>" (,@lisps))
       ))
   "A list of ((character category pattern major-modes) ...).
 For each entry in the list, if the buffer's major mode (or one of
