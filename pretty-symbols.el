@@ -3,6 +3,7 @@
 ;; Copyright (C) 2012 David Röthlisberger
 
 ;; Author: David Röthlisberger <david@rothlis.net>
+;; URL: http://github.com/drothlis/pretty-symbols
 ;; Version: 2.0
 ;; Keywords: faces
 
@@ -24,7 +25,6 @@
 ;;; Commentary:
 
 ;; Minor mode for drawing multi-character tokens as Unicode glyphs.
-;; http://github.com/drothlis/pretty-symbols
 ;;
 ;; This mode is heavily inspired by Trent Buck's pretty-symbols-mode[1]
 ;; and Arthur Danskin's pretty-mode[2]; but aims to replace those modes, and
