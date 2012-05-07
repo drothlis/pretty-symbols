@@ -80,18 +80,68 @@ symbols in: (add-hook 'emacs-lisp-mode 'pretty-symbols-mode)."
   "Draw multi-character tokens as Unicode glyphs."
   :group 'font-lock)
 
+;;;###autoload
 (defcustom pretty-symbol-patterns
-  (let ((lispen '(emacs-lisp-mode inferior-lisp-mode lisp-mode)))
-    `((?λ "\\<lambda\\>" (,@lispen python-mode))
-      (?ƒ "\\<function\\>" (js-mode))))
-  "A list of (character pattern major-modes).
+  (let ((lisps '(emacs-lisp-mode inferior-lisp-mode lisp-mode))
+        (c-like '(c-mode c++-mode go-mode java-mode js-mode
+                  perl-mode cperl-mode python-mode ruby-mode)))
+    `(
+      ;; Basic symbols, enabled by default
+      (?λ lambda "\\<lambda\\>" (,@lisps python-mode))
+      (?ƒ lambda "\\<function\\>" (js-mode))
+      ;; Relational operators --
+      ;; enable by adding 'relational to `pretty-symbol-categories'
+      (?≠ relational "!=" (,@c-like))
+      (?≠ relational "/=" (,@lisps))
+      (?≥ relational ">=" (,@c-like ,@lisps))
+      (?≤ relational "<=" (,@c-like ,@lisps))
+      ;; Logical operators
+      (?∧ logical "&&" (,@c-like))
+      (?∧ logical "\\<and\\>" (,@lisps))
+      (?∨ logical "||" (,@c-like))
+      (?∨ logical "\\<or\\>" (,@lisps))
+      ;;(?¬ 'logical "\\<!\\>" (,@c-like)) ; TODO: Fix regex so that ! matches
+                                        ; but != doesn't. (\< and \> don't work
+                                        ; because ! isn't considered part of
+                                        ; a word). This will require support
+                                        ; for subgroups and not replacing the
+                                        ; whole match.
+      (?¬ 'logical "\\<not\\>" (,@lisps))
+      ))
+  "A list of ((character category pattern major-modes) ...).
 For each entry in the list, if the buffer's major mode (or one of
 its parent modes) is listed in MAJOR-MODES, occurrences of
 PATTERN will be shown as CHARACTER instead.
 
+The replacement will only happen if CATEGORY is present in
+`pretty-symbol-categories' before this mode is enabled.
+
 Note that a major mode's presence in this list doesn't turn on
 pretty-symbols-mode; you have to do so in the major mode's hook."
   :group 'pretty-symbols)
+
+;;;###autoload
+(defcustom pretty-symbol-categories (list 'lambda)
+  "A list of the categories in `pretty-symbol-patterns' to enable.
+
+By default, only lambdas (and the equivalents in other languages)
+are prettified, so that users can use this minor mode to add their
+own patterns, without being saddled with a whole lot of confusing
+symbols.
+
+This must be set before `pretty-symbols-mode' is enabled.
+
+The available symbols are:
+
+lambda          Prettify the keyword for lambdas (anonymous functions).
+relational      Relational operators: ≠ ≤ ≥
+logical         Logical operators: ∧ ∨ ¬
+
+To set this list from your init file:
+\(setq pretty-symbol-categories '(lambda relational logical))
+"
+  :group 'pretty-symbols
+  :type '(list symbol))
 
 
 ;; Internal functions
@@ -101,10 +151,11 @@ pretty-symbols-mode; you have to do so in the major mode's hook."
   (delq nil (mapcar (lambda (x) (apply 'pretty-symbol-pattern-to-keyword x))
                     pretty-symbol-patterns)))
 
-(defun pretty-symbol-pattern-to-keyword (char pattern modes)
+(defun pretty-symbol-pattern-to-keyword (char category pattern modes)
   "For a single entry in `pretty-symbol-patterns' return a list
 suitable as a single entry in `font-lock-keywords'."
-  (if (apply 'derived-mode-p modes)
+  (if (and (memq category pretty-symbol-categories)
+           (apply 'derived-mode-p modes))
       `(,pattern (0 (progn (compose-region (match-beginning 0) (match-end 0)
                                            ,char 'decompose-region)
                            nil)))))
