@@ -167,7 +167,7 @@ suitable as a single entry in `font-lock-keywords'."
 
 ;; Local Variables:
 ;; coding: utf-8
-;; eval: (pretty-symbols-mode -1)
+;; eval: (if (fboundp 'pretty-symbols-mode) (pretty-symbols-mode -1))
 ;; End:
 
 ;;; pretty-symbols.el ends here
