@@ -35,7 +35,7 @@
 ;;   replacements,
 ;; * that doesn't turn on all sorts of crazy mathematical symbols by default,
 ;; * is a self-contained project under source control, open to contributions,
-;; * available in a well-known package repository like Marmalade (TODO).
+;; * available from the MELPA package repository[4].
 ;;
 ;; You probably won't want to use this with haskell-mode which has its own much
 ;; fancier fontification[3]. Eventually it would be nice if this package grew
@@ -50,6 +50,7 @@
 ;; [1] http://paste.lisp.org/display/42335/raw
 ;; [2] http://www.emacswiki.org/emacs/pretty-mode.el
 ;; [3] https://github.com/haskell/haskell-mode/blob/master/haskell-font-lock.el
+;; [4] http://melpa.milkbox.net/
 
 ;;; Code:
 
