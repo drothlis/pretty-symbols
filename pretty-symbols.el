@@ -68,7 +68,7 @@ symbols in: (add-hook 'emacs-lisp-mode 'pretty-symbols-mode)."
   (if pretty-symbols-mode
       (font-lock-add-keywords nil (pretty-symbol-keywords) t)
     (font-lock-remove-keywords nil (pretty-symbol-keywords))
-    ;; TODO: Disabling the mode doesn't unfontify existing symbols.
+    ;; TODO: Disabling the mode doesn't decompose existing symbols.
     ;; Is the following safe to do -- what else uses composition?
     ;; (remove-text-properties (point-min) (point-max) '(composition nil))
     ))
@@ -90,8 +90,7 @@ its parent modes) is listed in MAJOR-MODES, occurrences of
 PATTERN will be shown as CHARACTER instead.
 
 Note that a major mode's presence in this list doesn't turn on
-pretty-symbols-mode; you have to do so manually or by adding
-pretty-symbols-mode to the major mode's hook."
+pretty-symbols-mode; you have to do so in the major mode's hook."
   :group 'pretty-symbols)
 
 
