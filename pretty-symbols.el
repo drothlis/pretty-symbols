@@ -1,4 +1,4 @@
-;;; pretty-symbols.el --- lambda -> λ.  -*- coding: utf-8; -*-
+;;; pretty-symbols.el --- Draw tokens as Unicode glyphs.
 
 ;; Copyright (C) 2012 David Röthlisberger
 
@@ -24,7 +24,8 @@
 
 ;;; Commentary:
 
-;; Minor mode for drawing multi-character tokens as Unicode glyphs.
+;; Minor mode for drawing multi-character tokens as Unicode glyphs
+;; (lambda -> λ).
 ;;
 ;; This mode is heavily inspired by Trent Buck's pretty-symbols-mode[1]
 ;; and Arthur Danskin's pretty-mode[2]; but aims to replace those modes, and
@@ -164,6 +165,7 @@ suitable as a single entry in `font-lock-keywords'."
 (provide 'pretty-symbols)
 
 ;; Local Variables:
+;; coding: utf-8
 ;; eval: (pretty-symbols-mode -1)
 ;; End:
 
