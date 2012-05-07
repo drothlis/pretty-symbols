@@ -1,4 +1,4 @@
-;;; pretty-symbols.el --- l a m b d a -> λ.  -*- coding: utf-8; -*-
+;;; pretty-symbols.el --- lambda -> λ.  -*- coding: utf-8; -*-
 
 ;; Copyright (C) 2012 David Röthlisberger
 
@@ -162,5 +162,9 @@ suitable as a single entry in `font-lock-keywords'."
 
 
 (provide 'pretty-symbols)
+
+;; Local Variables:
+;; eval: (pretty-symbols-mode -1)
+;; End:
 
 ;;; pretty-symbols.el ends here
