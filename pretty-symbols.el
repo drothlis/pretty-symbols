@@ -27,6 +27,8 @@
 ;; Minor mode for drawing multi-character tokens as Unicode glyphs
 ;; (lambda -> λ).
 ;;
+;; Only works when `font-lock-mode' is enabled.
+;;
 ;; This mode is heavily inspired by Trent Buck's pretty-symbols-mode[1]
 ;; and Arthur Danskin's pretty-mode[2]; but aims to replace those modes, and
 ;; the many others scattered on emacswiki.org, with:
