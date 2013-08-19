@@ -67,7 +67,7 @@ changes the line length and can thus lead to surprises with
 respect to alignment and layout.
 
 To enable, add to the hooks of the major modes you want pretty
-symbols in: (add-hook 'emacs-lisp-mode 'pretty-symbols-mode)."
+symbols in: (add-hook 'emacs-lisp-mode-hook 'pretty-symbols-mode)."
   nil " λ" nil
   (if pretty-symbols-mode
       (font-lock-add-keywords nil (pretty-symbol-keywords) t)
