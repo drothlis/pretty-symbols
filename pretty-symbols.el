@@ -89,10 +89,11 @@ symbols in: (add-hook 'emacs-lisp-mode-hook 'pretty-symbols-mode)."
   (let ((lisps '(emacs-lisp-mode inferior-lisp-mode lisp-mode
                  scheme-mode))
         (c-like '(c-mode c++-mode go-mode java-mode js-mode
-                  perl-mode cperl-mode python-mode ruby-mode)))
+                  perl-mode cperl-mode ruby-mode
+                  python-mode inferior-python-mode)))
     `(
       ;; Basic symbols, enabled by default
-      (?λ lambda "\\<lambda\\>" (,@lisps python-mode))
+      (?λ lambda "\\<lambda\\>" (,@lisps python-mode inferior-python-mode))
       (?ƒ lambda "\\<function\\>" (js-mode))
       ;; Relational operators --
       ;; enable by adding 'relational to `pretty-symbol-categories'
