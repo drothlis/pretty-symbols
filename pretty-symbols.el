@@ -157,14 +157,15 @@ To set this list from your init file:
   (delq nil (mapcar (lambda (x) (apply 'pretty-symbol-pattern-to-keyword x))
                     pretty-symbol-patterns)))
 
-(defun pretty-symbol-pattern-to-keyword (char category pattern modes)
+(defun pretty-symbol-pattern-to-keyword (char category pattern modes &optional idx)
   "For a single entry in `pretty-symbol-patterns' return a list
 suitable as a single entry in `font-lock-keywords'."
-  (if (and (memq category pretty-symbol-categories)
-           (apply 'derived-mode-p modes))
-      `(,pattern (0 (progn (compose-region (match-beginning 0) (match-end 0)
-                                           ,char 'decompose-region)
-                           nil)))))
+  (let ((idx (or idx 0)))
+    (if (and (memq category pretty-symbol-categories)
+             (apply 'derived-mode-p modes))
+        `(,pattern (,idx (progn (compose-region (match-beginning ,idx) (match-end ,idx)
+                                                ,char 'decompose-region)
+                                nil))))))
 
 
 (provide 'pretty-symbols)
