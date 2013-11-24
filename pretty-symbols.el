@@ -124,7 +124,13 @@ The replacement will only happen if CATEGORY is present in
 
 Note that a major mode's presence in this list doesn't turn on
 pretty-symbols-mode; you have to do so in the major mode's hook."
-  :group 'pretty-symbols)
+  :group 'pretty-symbols
+  :type '(repeat
+          (list (character :tag "Pretty character")
+                (symbol :tag "Category")
+                (regexp :tag "Pattern to replace")
+                (repeat :tag "Enable in major modes"
+                        (symbol :tag "Mode")))))
 
 ;;;###autoload
 (defcustom pretty-symbol-categories (list 'lambda)
@@ -147,7 +153,8 @@ To set this list from your init file:
 \(setq pretty-symbol-categories '(lambda relational logical))
 "
   :group 'pretty-symbols
-  :type '(list symbol))
+  :type '(repeat :tag "Enabled categories"
+                 (symbol :tag "Category")))
 
 
 ;; Internal functions
