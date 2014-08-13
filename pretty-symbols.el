@@ -86,8 +86,8 @@ symbols in: (add-hook 'emacs-lisp-mode-hook 'pretty-symbols-mode)."
 
 ;;;###autoload
 (defcustom pretty-symbol-patterns
-  (let ((lisps '(emacs-lisp-mode inferior-lisp-mode lisp-mode
-                 scheme-mode))
+  (let ((lisps '(emacs-lisp-mode inferior-lisp-mode inferior-emacs-lisp-mode
+                 lisp-mode scheme-mode))
         (c-like '(c-mode c++-mode go-mode java-mode js-mode
                   perl-mode cperl-mode ruby-mode
                   python-mode inferior-python-mode)))
