@@ -153,8 +153,16 @@ To set this list from your init file:
 \(setq pretty-symbol-categories '(lambda relational logical))
 "
   :group 'pretty-symbols
-  :type '(repeat :tag "Enabled categories"
-                 (symbol :tag "Category")))
+  :type '(list
+          (set :tag "Standard Categories"
+               :inline t
+               (const lambda)
+               (const relational)
+               (const logical)
+               )
+          (repeat :tag "Additional Categories"
+                  :inline t
+                  (symbol :tag "Category"))))
 
 
 ;; Internal functions
