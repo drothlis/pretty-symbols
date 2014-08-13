@@ -113,6 +113,7 @@ symbols in: (add-hook 'emacs-lisp-mode-hook 'pretty-symbols-mode)."
                                         ; for subgroups and not replacing the
                                         ; whole match.
       (?¬ logical "\\<not\\>" (,@lisps))
+      (∅ nil "\\<nil\\>" (,@lisps))
       ))
   "A list of ((character category pattern major-modes) ...).
 For each entry in the list, if the buffer's major mode (or one of
@@ -159,7 +160,7 @@ To set this list from your init file:
                (const lambda)
                (const relational)
                (const logical)
-               )
+               (const nil))
           (repeat :tag "Additional Categories"
                   :inline t
                   (symbol :tag "Category"))))
