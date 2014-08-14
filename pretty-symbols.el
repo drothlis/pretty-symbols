@@ -86,8 +86,8 @@ symbols in: (add-hook 'emacs-lisp-mode-hook 'pretty-symbols-mode)."
 
 ;;;###autoload
 (defcustom pretty-symbol-patterns
-  (let ((lisps '(emacs-lisp-mode inferior-lisp-mode lisp-mode
-                 scheme-mode))
+  (let ((lisps '(emacs-lisp-mode inferior-lisp-mode inferior-emacs-lisp-mode
+                 lisp-mode scheme-mode))
         (c-like '(c-mode c++-mode go-mode java-mode js-mode
                   perl-mode cperl-mode ruby-mode
                   python-mode inferior-python-mode)))
@@ -113,6 +113,7 @@ symbols in: (add-hook 'emacs-lisp-mode-hook 'pretty-symbols-mode)."
                                         ; for subgroups and not replacing the
                                         ; whole match.
       (?¬ logical "\\<not\\>" (,@lisps))
+      (?∅ nil "\\<nil\\>" (,@lisps))
       ))
   "A list of ((character category pattern major-modes) ...).
 For each entry in the list, if the buffer's major mode (or one of
@@ -153,8 +154,16 @@ To set this list from your init file:
 \(setq pretty-symbol-categories '(lambda relational logical))
 "
   :group 'pretty-symbols
-  :type '(repeat :tag "Enabled categories"
-                 (symbol :tag "Category")))
+  :type '(list
+          (set :tag "Standard Categories"
+               :inline t
+               (const lambda)
+               (const relational)
+               (const logical)
+               (const nil))
+          (repeat :tag "Additional Categories"
+                  :inline t
+                  (symbol :tag "Category"))))
 
 
 ;; Internal functions
